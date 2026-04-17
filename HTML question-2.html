@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Buster Quiz</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background: linear-gradient(135deg, #2b5876, #4e4376);
+}
+#navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;
+}
+#navbar input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ff9500;
+    margin-left: auto;
+    width: 200px;
+    outline: none;
+}
+#navbar #button {
+    padding: 6px 12px;
+    background-color: #ff9500;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#navbar {
+    width: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: auto;
+    cursor: pointer;
+    text-align: center;
+}
+
+#logo-icon {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff9500;
+    background-color: #333;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 5px;
+}
+
+#logo-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff9500;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    color: white;
+    padding-top: 60px; /* To account for navbar */
+}
+
+#question {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.answers div {
+    background-color: #4a5568;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.answers label {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.answers input[type="radio"] {
+    accent-color: #ff9500;
+    transform: scale(1.2);
+}
+
+#submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#submit-button:hover {
+    background-color: #218838;
+}
+.progress-container {
+    position:relative;
+	top: 220px;
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    margin: 20px 0;
+}
+.progress-bar {
+    width: 20%; 
+    height: 20px;
+    background-color: #4caf50;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-weight: bold;
+}
+#timer{
+    /* margin-top: 30px; */
+    position: fixed;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 35px;
+    width: 200px;
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+</style>
+</head>
+<body>
+<div id="navbar">
+    <div id="logo-container">
+        <div id="logo-icon">BB</div>
+        <div id="logo-text">Brain Buster</div>
+    </div>
+    <a href="#">Courses</a>
+    <a href="#">Tutorials</a>
+    <a href="#">Practice</a>
+    <a href="#">Contest</a>
+    <a href="#">Contact Us</a>
+    <a href="#">My Account</a>
+    <input type="text" placeholder="Search here">
+    <button id="button">Search </button>
+</div>
+
+<div class="progress-container">
+    <div class="progress-bar">20%</div> 
+</div>
+
+<div class="container">
+    <div id="question">
+        Q2.Which tag is used to create a paragraph in HTML?
+    </div>
+    <div class="answers">
+        <div>
+            <input type="radio" id="answer1" name="html-question">
+            <label for="answer1">< p ></label>
+        </div>
+        <div>
+            <input type="radio" id="answer2" name="html-question">
+            <label for="answer2">< pg ></label>
+        </div>
+        <div>
+            <input type="radio" id="answer3" name="html-question">
+            <label for="answer3">< para ></label>
+        </div>
+    </div>
+    <a href="C:\Users\Erabe\OneDrive\Desktop\new project css\HTML question-3.html"><button id="submit-button">Submit Answer</button></a>
+    <div id="timer">Time Starts Now!</div>
+
+        <script>
+            let timeLeft = 20; // Set the timer for 20 seconds
+            const timerElement = document.getElementById('timer');
+
+            const countdown = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerElement.innerHTML = "Time's up!";
+                } else {
+                    timerElement.innerHTML = timeLeft;
+                    timeLeft--;
+                }
+            }, 1000); // Update every second (1000 milliseconds)
+        </script>
+</div>
+</body>
+</html>
